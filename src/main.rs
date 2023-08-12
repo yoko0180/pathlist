@@ -48,8 +48,8 @@ fn print_path(filter: Option<&str>) {
     // println!("env:{}", pathstr);
 
     for vv in pathstr.split(";") {
-        if filter.map_or(true, |x| vv.contains(x)) {
-            println!("*** path {}", vv);
+        if filter.map_or(true, |x| match_str(vv, x)) {
+            println!("{}", vv);
         }
     }
 }
