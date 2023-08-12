@@ -3,7 +3,7 @@ use std::env;
 
 use clap::Parser;
 
-/// 環境変数PATHを表示するコマンドです
+/// 環境変数PATHを一覧表示するコマンドです
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
@@ -14,7 +14,7 @@ struct Args {
     // / Number of times to greet
     // #[arg(short, long, default_value_t = 1)]
     // count: u8,
-
+    /// 指定すると含まれる変数値だけを表示します
     // filter: Option<String>
     filter: Option<String>,
 }
@@ -47,9 +47,12 @@ fn print_path(filter: Option<&str>) {
     // let pathstr = env::var("PATH").expect("");
     // println!("env:{}", pathstr);
 
-    for vv in pathstr.split(";") {
-        if filter.map_or(true, |x| match_str(vv, x)) {
-            println!("{}", vv);
+    for path_line in pathstr.split(";") {
+        if path_line.trim() == "" {
+            continue;
+        }
+        if filter.map_or(true, |x| match_str(path_line, x)) {
+            println!("{}", path_line);
         }
     }
 }
