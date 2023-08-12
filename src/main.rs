@@ -3,7 +3,7 @@ use std::env;
 
 use clap::Parser;
 
-/// Print enviloment PATH.
+/// 環境変数PATHを表示するコマンドです
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
